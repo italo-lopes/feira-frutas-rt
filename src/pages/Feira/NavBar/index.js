@@ -1,8 +1,9 @@
+import React from 'react';
 import { Nav } from './styles';
 import { ReactComponent as Logo } from 'assets/logo.svg';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
 
 export default function NavBar() {
   return (
@@ -12,7 +13,7 @@ export default function NavBar() {
         <Badge
           color="primary"
         >
-          <ShoppingCartIcon />
+        <ShoppingCartIcon/>
         </Badge>
       </IconButton>
     </Nav>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import FormControl from '@material-ui/core/FormControl';
+import {FormControl} from '@mui/material';
 
 export const Container = styled.div`
   display: flex;

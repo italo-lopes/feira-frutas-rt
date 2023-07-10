@@ -1,15 +1,22 @@
-import { Button, Snackbar, InputLabel } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
+import { Button, InputLabel } from  '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import { useState } from 'react';
 import { Container, Voltar, TotalContainer, PagamentoContainer} from './styles';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Carrinho() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const nav = useNavigate('-1')
+  console.log(nav)
   return (
     <Container>
-      <Voltar />
+      <Link  to={'/feira'} > 
+      <Voltar/>
+      </Link>
       <h2>
-        Carrinho
+        Carrinho 
       </h2>
       <PagamentoContainer>
         <InputLabel> Forma de Pagamento </InputLabel>
@@ -45,7 +52,6 @@ function Carrinho() {
             }
           }
           open={openSnackbar}
-          onClose={() => setOpenSnackbar(false)}
         >
            <MuiAlert
             onClose={() => setOpenSnackbar(false)}

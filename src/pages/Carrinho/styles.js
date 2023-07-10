@@ -1,6 +1,8 @@
-import { FormControl, IconButton } from '@material-ui/core';
+import React from 'react';
+import { FormControl } from '@mui/material';
+import { IconButton } from '@mui/material';
 import styled from 'styled-components';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const titleGray = '#464646';
 
 export const Container = styled.main`

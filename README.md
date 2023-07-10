@@ -1,8 +1,62 @@
+# ContextAPI
+
+ Como evitar Props drilling
+ 
+ criar pasta chamada src-common -Ususrio.jsx (de comum estados comum)
+
+ modo antigo
+
+    import { createContext } from ‘react’;
+
+    export const UsuarioContext = createContext();
+ 
+ =========
+
+        import { UsuarioContext } from ‘common/context/Usuario’;
+          <route>
+          <UsuarioContext.Provider value={{ nome, setNome, saldo, setSaldo }} >
+            <Login  />
+          </UsuarioContext.Provider/>
+          </route>
+
+ == 
+        
+        import { UsuarioContext } from ‘common/context/Usuario’;
+        <UsuarioContext.Consumer>
+            {({nome, setNome, saldo, setSaldo}) => (
+            <>
+            ...
+            </>
+            )}
+        </UsuarioContext.Consumer>
+
+
+
+hook 16.8
+
+    function MeuComponente() {
+    const variavel1 = useContext(ContextoUm);
+    const variavel2 = useContext(ContextoDois);
+    const variavel3 = useContext(ContextoTres);
+    return (
+        <>
+        ...
+        </>
+    )
+    }
+
+    componete
+    UsuarioContext.Consumer>
+	({v})=>{()}
+
 # Dependecia
     npm install --save styled-components
     npm install @mui/material @emotion/react @emotion/styled
 
 
+# lagado  
+    const history = useHistory()
+    history.push('/')
 
 # Getting Started with Create React App
 

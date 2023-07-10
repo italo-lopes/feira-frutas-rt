@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Container } from "./styles";
 import { memo } from "react";
@@ -6,8 +6,24 @@ import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-function Produto({ nome, foto, valor,numero}) {
-  console.log('s')
+function Produto({ nome, foto, valor,numero ,saldo,mandarValor}) {
+  const [quantidade,setQuantidade] = useState(0)
+
+  const somar = () =>{
+    console.log(saldo)
+      if(saldo >= valor){
+      mandarValor(valor,false)
+      setQuantidade(quantidade=>quantidade+1)
+      }
+
+  }
+  const subtrair = () =>{
+    if(quantidade !== 0){
+    mandarValor(valor,true)
+    setQuantidade(quantidade=>quantidade-1)
+    }
+}
+
   return (
     <Container>
       <div>
@@ -17,11 +33,12 @@ function Produto({ nome, foto, valor,numero}) {
         </p>
       </div>
       <div>
-        <IconButton color="secondary">
+        <IconButton color="secondary" onClick={subtrair}>
           <RemoveIcon />
         </IconButton>
-        <IconButton>
-          <AddIcon />
+        <h3>{quantidade}</h3>
+        <IconButton onClick={somar}>
+          <AddIcon/>
         </IconButton>
       </div>
     </Container>

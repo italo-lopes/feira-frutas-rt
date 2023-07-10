@@ -1,38 +1,32 @@
-import React from 'react';
-import { BrowserRouter,Routes,Route } from "react-router-dom";
-import { ThemeProvider, createTheme, StyledEngineProvider } from '@mui/material/styles';
-import Feira from './pages/Feira';
-import Login from './pages/Login';
-import Carrinho from './pages/Carrinho';
-
-const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#2A9F85'
-      },
-      secondary: {
-        main: '#FF7070'
-      },
-    }
-  })
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Feira from "./pages/Feira";
+import Login from "./pages/Login";
+import Carrinho from "./pages/Carrinho";
+import { UsuarioContext } from "./common/Usuario";
 
 const App = () => {
-    return ( 
-        <BrowserRouter>
-          <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            <Routes>    
-                     <Route exact path='/' element={<Login/>}/>  
-                     <Route path="/feira" element={<Feira/>}/> 
-                     <Route path={"/carrinho"} element={<Carrinho/>}/> 
-                     <Route path='*' element={<h4>ERRO</h4>}/>  
-            </Routes>
-            </ThemeProvider>
-        </StyledEngineProvider>
-       </BrowserRouter>
-     );
-}
-     
+  const [nome, setNome] = useState("");
+  const [numero, setNumero] = useState("");
+
+  return (
+    <BrowserRouter>
+      <Routes>
+
+        
+          <Route exact path="/" element={
+                <UsuarioContext.Provider value={{ nome, setNome, numero, setNumero }}>
+                <Login />
+                </UsuarioContext.Provider>
+          } />
+
+
+        <Route path="/feira" element={<Feira nome={nome} numero={numero} />} />
+        <Route path={"/carrinho"} element={<Carrinho />} />
+        <Route path="*" element={<h4>ERRO</h4>} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
 export default App;
-
-

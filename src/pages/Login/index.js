@@ -4,18 +4,21 @@ import { Container, Titulo, InputContainer } from "./styles";
 import { Input, InputLabel, InputAdornment } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { UsuarioContext } from "../../common/Usuario";
+import { useContext } from 'react';
 
 
-const Login = ({nome,setNome, setNumero , numero})=> {
+const Login = ()=> {
   const navegar = useNavigate()
   // const aoAlterar =(e)=>{
   //   setNome(e.target.value)
   // }
+  const  {nome, setNome, numero, setNumero} = useContext(UsuarioContext);
   return (
     <Container>
-      <UsuarioContext.Consumer>
+      {/* <UsuarioContext.Consumer>
       {({nome, setNome, numero, setNumero})=>(
-      <>
+      <> */}
+     
       <Titulo>Insira o seu nome</Titulo>
       <InputContainer>
         <InputLabel>Nome</InputLabel>
@@ -36,17 +39,17 @@ const Login = ({nome,setNome, setNumero , numero})=> {
       </InputContainer>
       
       <Button variant="contained" color="primary"
-       onClick={()=>navegar('/feira')}
+       disabled={nome.length < 3}
+       onClick={()=>navegar('/feira')
+      }
       >
         Avançar
       </Button>
       <Titulo> Seu nome atual é: {nome} </Titulo>
       <Titulo> Seu nome atual é: {numero} </Titulo>
-      </>
-      )	}
-
-      </UsuarioContext.Consumer>
-    </Container>
+     {/* </> )	}
+      </UsuarioContext.Consumer> */}
+     </Container>
   );
 }
 

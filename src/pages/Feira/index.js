@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect } from 'react';
 
 import { Container, Header, Lista } from "./styles";
 import feira from "./feira.json";
 import Produto from "components/Produto";
 import NavBar from "./NavBar";
 import { useNavigate } from 'react-router-dom';
+import { UsuarioContext } from "../../common/Usuario";
+import { CarrinhoContext } from "../../common/Carrinho";
 
-function Feira({nome,numero}) {
+
+//{nome,numero} prps pelo context da aplicação
+function Feira() {
+  const {carrinho} = useContext(CarrinhoContext)
+  const {nome,numero} = useContext(UsuarioContext)
+  // const [saldo,setSaldo] = useState(numero)
   console.log(feira)
   console.log(nome)
   // antes de redenrizar fazer tal coisa
@@ -18,6 +25,11 @@ function Feira({nome,numero}) {
   },[nome,navegar]);
 
 
+  useEffect(()=>{
+        console.log("===========")
+        console.log(carrinho)
+        console.log("===========")
+},[carrinho])
   //Ao adicionar 
   // eslint-disable-next-lin(e) antes do navigate('/outra-rota');,
   // o linter ignorará o aviso específico para aquela linha em particular, 
@@ -25,16 +37,17 @@ function Feira({nome,numero}) {
 
 
 
-  const [saldo,setSaldo] = useState(numero)
+  //const [saldo,setSaldo] = useState(numero)
 
-  const recebeValor = (valor,verifivar)=>{
+  // const recebeValor = (valor,verifivar)=>{
 
-    verifivar
-        ?  valor = saldo + valor
-        :  valor = saldo - valor
+  //   verifivar
+  //       ?  valor = saldo + valor
+  //       :  valor = saldo - valor
        
-        setSaldo(parseFloat(valor.toFixed(2)))
-  }
+  //       setSaldo(parseFloat(valor.toFixed(2)))
+  // };
+
   
 
   return (  
@@ -43,15 +56,14 @@ function Feira({nome,numero}) {
       <Header>
         <div>
           <h2> Olá! {nome}</h2>
-          <h3> Saldo: R${saldo}</h3>
+          <h3> Saldo: R${numero}</h3>
         </div>
         <p>Encontre os melhores produtos orgânicos!</p>
       </Header>
       <Lista>
         <h2>Produtos:</h2>
         {feira.map((produto) => (
-          <Produto {...produto} key={produto.id} saldo={saldo} 
-          mandarValor={recebeValor} />
+          <Produto {...produto} key={produto.id} saldo={produto.valor}   />
         ))}
       </Lista>
     </Container>
